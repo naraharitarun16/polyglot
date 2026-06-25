@@ -1,116 +1,170 @@
-# Polyglot Chat Application
+# 🌐 Polyglot Chat Application
 
-## 📋 Project Overview
-
-A **real-time chat application** with user authentication, message persistence, and multi-language support built with modern web technologies.
-
-### 🎯 Key Features
-- ✅ **User Authentication** - Signup/Login with password hashing (BCrypt)
-- ✅ **Real-time Messaging** - WebSocket-based instant messaging
-- ✅ **Database Persistence** - H2 in-memory database (upgradeable to PostgreSQL/MySQL)
-- ✅ **Email Validation** - Unique username and email constraints
-- ✅ **JWT Authorization** - Secure token-based authentication
-- ✅ **Message History** - All messages stored and retrievable
-- ✅ **User Management** - Track user activity and last login
+A modern **real-time chat application** built using **Spring Boot**, **React**, **WebSocket**, and **JWT Authentication**. The application provides secure user authentication, persistent messaging, and scalable architecture for real-time communication.
 
 ---
 
-## 🏗️ Project Architecture
+## 📖 Overview
 
-```
-polyglot-chat-app/
-│
-├── backend/                    # Spring Boot REST API & WebSocket Server
-│   ├── src/main/java/
-│   │   └── com/polyglot/chat/
-│   │       ├── ChatApplication.java       (Main entry point)
-│   │       ├── config/                    (Spring configuration)
-│   │       ├── controller/                (REST endpoints)
-│   │       ├── model/                     (JPA entities)
-│   │       ├── security/                  (JWT & auth)
-│   │       └── service/                   (Business logic)
-│   ├── src/main/resources/
-│   │   ├── application.properties         (Configuration)
-│   │   └── static/                        (Static files)
-│   └── pom.xml                            (Maven dependencies)
-│
-├── frontend/                   # React Web Application
+Polyglot Chat is a full-stack web application designed to demonstrate modern software engineering practices, including secure authentication, RESTful APIs, real-time communication, and database persistence.
+
+The project follows a clean separation between the backend and frontend, making it easy to maintain, extend, and deploy.
+
+---
+
+# ✨ Features
+
+* Secure user registration and login
+* Password encryption using BCrypt
+* JWT-based authentication and authorization
+* Real-time messaging using WebSockets (STOMP)
+* Persistent message storage
+* User management with activity tracking
+* Unique username and email validation
+* RESTful API architecture
+* Responsive React-based user interface
+
+---
+
+# 🏗 Project Architecture
+
+```text
+polyglot-chat/
+
+├── chat/                     # Spring Boot Backend
 │   ├── src/
-│   │   ├── App.js              (Main React component)
-│   │   ├── components/
-│   │   │   ├── Login.js        (Login page)
-│   │   │   └── Chat.js         (Chat interface)
-│   │   └── index.js            (React entry point)
-│   └── package.json            (NPM dependencies)
+│   ├── pom.xml
+│   └── application.properties
 │
-└── docs/                       # Documentation
-    ├── API.md                  (REST API endpoints)
-    ├── DATABASE.md             (Database schema)
-    ├── SETUP.md                (Quick start guide)
-    └── ARCHITECTURE.md         (System design)
+├── chat-frontend/            # React Frontend
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── docs/                     # Project Documentation
+│   ├── API.md
+│   ├── DATABASE.md
+│   ├── SETUP.md
+│   └── ARCHITECTURE.md
+│
+└── README.md
 ```
 
 ---
 
-## 🔧 Technology Stack
+# 🛠 Technology Stack
 
-### Backend
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| **Spring Boot** | 3.5.10 | REST API Framework |
-| **Java** | 17 LTS | Programming Language |
-| **Spring Data JPA** | Latest | ORM & Database Access |
-| **H2 Database** | 2.3.232 | In-Memory Database |
-| **Spring Security** | 6.2.15 | Authentication |
-| **JWT** | Latest | Token Authorization |
-| **WebSocket** | STOMP | Real-time Messaging |
+## Backend
 
-### Frontend
-| Technology | Version | Purpose |
-|-----------|---------|---------|
-| **React** | 18.2.0 | UI Framework |
-| **STOMP** | 7.3.0 | WebSocket Client |
-| **JavaScript (ES6)** | - | Programming Language |
+| Technology        | Purpose                        |
+| ----------------- | ------------------------------ |
+| Java 17           | Programming Language           |
+| Spring Boot       | Backend Framework              |
+| Spring Security   | Authentication & Authorization |
+| Spring Data JPA   | Database Access                |
+| JWT               | Token-Based Authentication     |
+| WebSocket (STOMP) | Real-Time Communication        |
+| H2 Database       | Development Database           |
+| Maven             | Dependency Management          |
 
 ---
 
-## 🚀 Quick Start
+## Frontend
 
-### Prerequisites
-- Java 17+ (JDK)
-- Node.js 14+ & npm
-- Maven 3.8+
+| Technology       | Purpose                 |
+| ---------------- | ----------------------- |
+| React            | User Interface          |
+| JavaScript (ES6) | Frontend Logic          |
+| STOMP Client     | WebSocket Communication |
+| HTML5 & CSS3     | UI Design               |
 
-### Backend Setup
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+* Java 17 or later
+* Maven 3.8+
+* Node.js 14+
+* npm
+
+---
+
+## Backend Setup
+
 ```bash
 cd chat
+
 ./mvnw clean package -DskipTests
+
 java -jar target/chat-0.0.1-SNAPSHOT.jar --server.port=8082
 ```
-**Backend runs on:** `http://localhost:8082`  
-**H2 Console:** `http://localhost:8082/h2-console`
 
-### Frontend Setup
-```bash
-cd chat-frontend
-npm install
-npm start
+Backend URL
+
 ```
-**Frontend runs on:** `http://localhost:3000`
+http://localhost:8082
+```
+
+H2 Console
+
+```
+http://localhost:8082/h2-console
+```
 
 ---
 
-## 🔐 Authentication Flow
+## Frontend Setup
 
-1. **Signup** → User creates account → Password hashed with BCrypt → Stored in database
-2. **Login** → User sends credentials → Validated with BCrypt → JWT token issued
-3. **Chat** → Client sends JWT in headers → Server validates token → Message delivered
+```bash
+cd chat-frontend
 
-### Sample API Requests
+npm install
 
-**Signup:**
-```json
+npm start
+```
+
+Frontend URL
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🔐 Authentication Flow
+
+### User Registration
+
+* User submits registration details.
+* Password is encrypted using BCrypt.
+* User information is stored securely.
+
+### User Login
+
+* Credentials are validated.
+* JWT access token is generated.
+* Token is returned to the client.
+
+### Messaging
+
+* Client authenticates using JWT.
+* WebSocket connection is established.
+* Messages are broadcast in real time.
+* Messages are stored in the database.
+
+---
+
+# 📡 REST API
+
+## Register User
+
+```http
 POST /auth/signup
+```
+
+```json
 {
   "username": "alice",
   "password": "securePassword123",
@@ -119,18 +173,32 @@ POST /auth/signup
 }
 ```
 
-**Login:**
-```json
+---
+
+## Login
+
+```http
 POST /auth/login
+```
+
+```json
 {
   "username": "alice",
   "password": "securePassword123"
 }
 ```
 
-**Send Message:**
+---
+
+## WebSocket Endpoint
+
+```
+ws://localhost:8082/ws
+```
+
+Example Message
+
 ```json
-WebSocket: ws://localhost:8082/ws
 {
   "sender": "alice",
   "content": "Hello everyone!",
@@ -140,145 +208,124 @@ WebSocket: ws://localhost:8082/ws
 
 ---
 
-## 📊 Database Schema
+# 🗄 Database Design
 
-### Users Table
-| Column | Type | Constraints |
-|--------|------|-------------|
-| id | BIGINT | PRIMARY KEY, AUTO_INCREMENT |
-| username | VARCHAR(50) | UNIQUE, NOT NULL |
-| password | VARCHAR(255) | NOT NULL (Hashed) |
-| email | VARCHAR(100) | UNIQUE, NOT NULL |
-| fullName | VARCHAR(100) | NOT NULL |
-| createdAt | TIMESTAMP | AUTO (NOW) |
-| lastLogin | TIMESTAMP | Updated on login |
-| isActive | BOOLEAN | Default: true |
+## Users
 
-### ChatMessages Table
-| Column | Type | Constraints |
-|--------|------|-------------|
-| id | BIGINT | PRIMARY KEY, AUTO_INCREMENT |
-| sender | VARCHAR(50) | FOREIGN KEY to Users |
-| content | TEXT | NOT NULL |
-| language | VARCHAR(20) | DEFAULT: 'en' |
-| createdAt | TIMESTAMP | AUTO (NOW) |
+| Column    | Description               |
+| --------- | ------------------------- |
+| id        | Primary Key               |
+| username  | Unique Username           |
+| password  | BCrypt Encrypted Password |
+| email     | Unique Email Address      |
+| fullName  | User's Full Name          |
+| createdAt | Account Creation Time     |
+| lastLogin | Last Login Timestamp      |
+| isActive  | User Status               |
 
 ---
 
-## 📁 Key Files Explained
+## Chat Messages
 
-### Backend Components
-- **ChatApplication.java** - Spring Boot main class that starts the server
-- **AuthController.java** - Handles /auth/signup, /auth/login endpoints
-- **ChatController.java** - Manages WebSocket /ws connections and messaging
-- **User.java** - Database entity for user accounts with validation
-- **ChatMessage.java** - Database entity for chat messages
-- **UserService.java** - Business logic: registration, validation, password hashing
-- **ChatMessageService.java** - Message persistence and retrieval
-- **SecurityConfig.java** - Spring Security configuration with BCrypt encoder
-
-### Frontend Components
-- **App.js** - Main React component with routing
-- **Login.js** - User login/signup page
-- **Chat.js** - Real-time chat interface
-- **index.js** - React DOM entry point
+| Column    | Description     |
+| --------- | --------------- |
+| id        | Primary Key     |
+| sender    | Message Sender  |
+| content   | Message Content |
+| language  | Language Code   |
+| createdAt | Timestamp       |
 
 ---
 
-## 🧪 Testing
+# 📁 Important Components
 
-### Test API Endpoints
-Open `chat/test.http` in VS Code with REST Client extension:
-```
-### Create new user
-POST http://localhost:8082/auth/signup
-Content-Type: application/json
+## Backend
 
-{
-  "username": "alice",
-  "password": "password123",
-  "email": "alice@example.com",
-  "fullName": "Alice Johnson"
-}
+* **ChatApplication.java** – Application entry point
+* **AuthController.java** – Authentication APIs
+* **ChatController.java** – WebSocket communication
+* **User.java** – User entity
+* **ChatMessage.java** – Message entity
+* **UserService.java** – User business logic
+* **ChatMessageService.java** – Message persistence
+* **SecurityConfig.java** – Spring Security configuration
 
-### Login
-POST http://localhost:8082/auth/login
-Content-Type: application/json
+---
 
-{
-  "username": "alice",
-  "password": "password123"
-}
+## Frontend
 
-### Get user count
-GET http://localhost:8082/auth/users/count
+* **App.js** – Main application
+* **Login.js** – Authentication page
+* **Chat.js** – Chat interface
+* **index.js** – React entry point
+
+---
+
+# 🧪 Testing
+
+Example API tests can be executed using the REST Client extension in VS Code.
+
+Example endpoints:
+
+```http
+POST /auth/signup
+
+POST /auth/login
+
+GET /auth/users/count
 ```
 
 ---
 
-## 🛠️ Development Tools
+# 📚 Documentation
 
-### Database Manager
-```bash
-# Windows
-cd chat && .\open-database.bat
+Additional documentation is available in the **docs/** directory.
 
-# Or navigate to
-http://localhost:8082/h2-console
-```
-
-### Build & Run
-```bash
-# Build only
-cd chat && ./mvnw clean package
-
-# Build and run
-cd chat && ./mvnw spring-boot:run
-
-# Run JAR directly
-java -jar chat/target/chat-0.0.1-SNAPSHOT.jar --server.port=8082
-```
+* API Documentation
+* Database Design
+* Setup Guide
+* Architecture Overview
 
 ---
 
-## 📚 Documentation
+# 🌟 Project Highlights
 
-- **[API.md](docs/API.md)** - Complete REST API reference
-- **[DATABASE.md](docs/DATABASE.md)** - Database schema details
-- **[SETUP.md](docs/SETUP.md)** - Installation instructions
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - System design patterns
-
----
-
-## 📈 Project Structure Benefits
-
-✅ **Clear Separation** - Backend API separate from frontend UI  
-✅ **Scalability** - Each component can be scaled independently  
-✅ **Maintainability** - Easy to locate and modify features  
-✅ **Testability** - Backend APIs testable with REST Client  
-✅ **Interview Ready** - Professional structure impresses interviewers  
+* Clean layered architecture
+* Secure authentication using JWT
+* Password encryption with BCrypt
+* Real-time messaging with WebSockets
+* Persistent database storage
+* Modular and scalable design
+* Professional project structure
+* Easy deployment and maintenance
 
 ---
 
-## 🔄 Deployment Ready
+# 🚀 Deployment
 
-### Backend Deployment
-- ✅ Spring Boot JAR can run anywhere with Java 17+
-- ✅ H2 upgradeable to PostgreSQL/MySQL with single config change
-- ✅ Docker-ready (Dockerfile can be added)
+### Backend
 
-### Frontend Deployment
-- ✅ React build creates optimized static files
-- ✅ Can be served by any web server
-- ✅ Can be deployed to Netlify, Vercel, AWS S3 + CloudFront
+* Executable Spring Boot JAR
+* Docker compatible
+* Easy migration from H2 to PostgreSQL or MySQL
+
+### Frontend
+
+* Production-ready React build
+* Deployable to Netlify
+* Deployable to Vercel
+* Deployable to AWS S3 or any static hosting platform
 
 ---
 
-## 👤 Author
-Developed for polyglot chat application showcase
+# 👨‍💻 Author
 
-**Last Updated:** February 13, 2026
-#   p o l y g l o t  
- #   p o l y g l o t  
- #   p o l y g l o t  
- 
+**Narahari Tarun**
+
+Bachelor of Engineering – Computer Science
+
+---
+
+## 📄 License
+
+This project is intended for educational and portfolio purposes.
