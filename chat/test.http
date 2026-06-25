@@ -1,0 +1,102 @@
+### Register/Signup New User - Alice
+POST http://localhost:8082/auth/signup
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "password123",
+  "email": "alice@example.com",
+  "fullName": "Alice Johnson"
+}
+
+###
+
+### Register/Signup New User - Bob
+POST http://localhost:8082/auth/signup
+Content-Type: application/json
+
+{
+  "username": "bob",
+  "password": "securepass456",
+  "email": "bob@example.com",
+  "fullName": "Bob Smith"
+}
+
+###
+
+### Login as Alice
+POST http://localhost:8082/auth/login
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "password123"
+}
+
+###
+
+### Login as Bob
+POST http://localhost:8082/auth/login
+Content-Type: application/json
+
+{
+  "username": "bob",
+  "password": "securepass456"
+}
+
+###
+
+### Try Invalid Signup - Existing Email
+POST http://localhost:8082/auth/signup
+Content-Type: application/json
+
+{
+  "username": "charlie",
+  "password": "password789",
+  "email": "alice@example.com",
+  "fullName": "Charlie Brown"
+}
+
+###
+
+### Try Invalid Signup - Weak Password
+POST http://localhost:8082/auth/signup
+Content-Type: application/json
+
+{
+  "username": "david",
+  "password": "weak",
+  "email": "david@example.com",
+  "fullName": "David Wilson"
+}
+
+###
+
+### Get Total Users Count
+GET http://localhost:8082/auth/users/count
+
+###
+
+### Get All Messages
+GET http://localhost:8082/api/messages
+
+###
+
+### Get Messages from Alice
+GET http://localhost:8082/api/messages/sender/alice
+
+###
+
+### Get Messages from Bob
+GET http://localhost:8082/api/messages/sender/bob
+
+###
+
+### View H2 Database Console (open in browser)
+GET http://localhost:8082/h2-console
+# Username: sa
+# Password: (leave blank)
+# JDBC URL: jdbc:h2:mem:chatdb
+
+###
+

@@ -1,0 +1,160 @@
+# .gitignore for Polyglot Chat Application
+
+# ===== BUILD & COMPILATION =====
+target/
+build/
+dist/
+*.jar
+*.war
+*.rar
+*.class
+*.o
+*.so
+*.dll
+
+# ===== FRONTEND BUILD =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.next/
+out/
+
+# ===== IDE & EDITOR =====
+.vscode/
+.idea/
+.DS_Store
+.swp
+.swo
+*~
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# ===== ENVIRONMENT & SECRETS =====
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+application-local.properties
+application-dev.properties
+*.p12
+*.pem
+*.key
+*.crt
+
+# ===== LOGS =====
+*.log
+logs/
+*.log.gz
+
+# ===== OS-SPECIFIC =====
+Thumbs.db
+.Thumbs.db
+.DS_Store
+Desktop.ini
+
+# ===== DEPENDENCY LOCKS (if not using Maven) =====
+package-lock.json
+yarn.lock
+
+# ===== TEMPORARY FILES =====
+*.tmp
+*.bak
+*.swp
+*~
+.tmp/
+temp/
+tmp/
+
+# ===== DATABASE (if using file-based) =====
+*.db
+*.sqlite
+*.sqlite3
+chat.mv.db
+chat.trace.db
+
+# ===== COVERAGE & TESTING =====
+coverage/
+*.coverage
+.nyc_output/
+test-results/
+
+# ===== GRADDLE (if applicable) =====
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+
+# ===== MAVEN CACHE =====
+.m2/
+
+# ===== MACOS =====
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ===== WINDOWS =====
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ===== INTELLIJ IDEA =====
+out/
+*.iml
+*.iws
+*.ipr
+
+# ===== ECLIPSE =====
+.externalToolBuilders/
+.loadpath
+local.properties
+
+# ===== CREDENTIALS & SENSITIVE DATA =====
+**/secrets/
+**/credentials/
+**/tokens/
+private_key
+public_key
+
+# ===== DEVELOPMENT ONLY FILES =====
+local-dev-notes.md
+scratch/
+poc/
+experiments/
+
+# ===== GENERATED FOLDERS =====
+**/generated-sources/
+**/generated-test-sources/
+**/generated/
+
+# ===== CACHE FILES =====
+.cache/
+.vuepress/dist
+.nuxt
+.cache
+.vuepress
+
+# ===== COMPRESSED FILES =====
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# ===== DOCKER (if applicable) =====
+docker-compose.override.yml
+
+# ===== VS CODE WORKSPACE SETTINGS (optional, usually .gitignore is better) =====
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json

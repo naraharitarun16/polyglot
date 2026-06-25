@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <h1>Chat Application</h1>
+    <div id="login">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" value="user1">
+        <input type="password" id="password" placeholder="Password" value="password1">
+        <button onclick="login()">Login</button>
+        <p id="token"></p>
+    </div>
+    <div id="chat" style="display:none;">
+        <h2>Chat</h2>
+        <div id="messages"></div>
+        <input type="text" id="message" placeholder="Type a message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        let stompClient = null;
+        let token = null;
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    token = data.token;
+                    document.getElementById('token').innerText = 'Token: ' + token;
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('chat').style.display = 'block';
+                    connect();
+                } else {
+                    alert('Login failed: ' + data.error);
+                }
+            });
+        }
+
+        function connect() {
+            const socket = new SockJS('/ws');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/public', function (message) {
+                    showMessage(JSON.parse(message.body));
+                });
+            });
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (stompClient && message) {
+                const chatMessage = {
+                    sender: document.getElementById('username').value,
+                    content: message,
+                    type: 'CHAT'
+                };
+                stompClient.send('/app/chat', {}, JSON.stringify(chatMessage));
+                document.getElementById('message').value = '';
+            }
+        }
+
+        function showMessage(message) {
+            const messages = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.innerText = message.sender + ': ' + message.content;
+            messages.appendChild(messageElement);
+        }
+    </script>
+</body>
+</html>
